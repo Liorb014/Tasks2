@@ -6,6 +6,17 @@ public class Program6 {
     }
     public static boolean valid (String equation){
         boolean equationIsValid = false;
+        char[] array = new char[equation.length()];
+        /*int a;
+        String iminus1;
+        for (int i = 0; i < array.length; i++) {
+            array[i] = equation.charAt(i);
+            iminus1 = i-1;
+            if(array[i] == 'x'){
+                a = equation.substring(0,iminus1);
+                break;
+            }
+        }*/
         if (equation.contains("x^2") && equation.contains("=0")&&(equation.contains("x+") || equation.contains("x-"))){
             equationIsValid = true;
         }
@@ -14,7 +25,7 @@ public class Program6 {
     public static int parameterA(String equation){
         int a=0;
         if(equation.startsWith("-")){
-            a = equation.charAt(2) * -1;
+            a = equation.charAt(1) * -1;
         }else {
             a = equation.charAt(0);
         }
@@ -22,19 +33,35 @@ public class Program6 {
     }
     public static int parameterB(String equation){
         int b=0;
-        if(equation.charAt(5) == '-'){
-            b = equation.charAt(6) * -1;
+        if(equation.charAt(0)=='-'){
+            if(equation.charAt(5) == '-'){
+                b = (equation.charAt(6))* -1;
+            }else {
+                b = equation.charAt(6);
+            }
         }else {
-            b = equation.charAt(5);
+            if (equation.charAt(4) == '-') {
+                b = equation.charAt(5) * -1;
+            } else {
+                b = equation.charAt(5);
+            }
         }
         return b;
     }
     public static int parameterC(String equation){
         int c=0;
-        if(equation.charAt(8) == '-'){
-            c = equation.charAt(9) * -1;
+        if(equation.charAt(0)=='-'){
+            if(equation.charAt(8) == '-'){
+                c = equation.charAt(9) * -1;
+            }else {
+                c = equation.charAt(9);
+            }
         }else {
-            c = equation.charAt(8);
+            if (equation.charAt(7) == '-') {
+                c = equation.charAt(8) * -1;
+            } else {
+                c = equation.charAt(8);
+            }
         }
         return c;
     }
