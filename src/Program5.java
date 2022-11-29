@@ -2,15 +2,17 @@ import java.util.Scanner;
 
 public class Program5 {
     public static void main(String[] args) {
-        char[] xando = {'x', 'x', 'o', 'x', 'o', 'x', 'o', 'o', 'x', 'o'};
-        printBoard(xando);
+        //  char[] xando = {'x', 'x', 'o', 'x', 'o', 'x', 'o', 'o', 'x', 'o'};
+        //printBoard(xando);
     }
 
     public static void printBoard(char[] xAndO) {
-        for (int i = 0; i < xAndO.length - 1; i++) {
-            System.out.print(xAndO[i] + "\t");
-            if (i == 2 || i == 5) {
-                System.out.println();
+        if (xAndO.length==9){
+            for (int i = 0; i < xAndO.length - 1; i++) {
+                System.out.print(xAndO[i] + "\t");
+                if (i == 2 || i == 5) {
+                    System.out.println();
+                }
             }
         }
     }
@@ -22,22 +24,23 @@ public class Program5 {
         }
         return isEmpty;
     }
-
-    public static void getPositionFromUser(char[] board) {
+    public static int getPositionFromUser(char[] board) {
         Scanner scanner = new Scanner(System.in);
         int position = 0;
+        position=scanner.nextInt();
         do {
             if (isAvailable(board, position) == true) {
-                System.out.println("please enter a position to place your x/o (from 1-9)");
-                position = scanner.nextInt();
-                break;
+            System.out.println("please enter a position to place your x/o (from 1-9)");
+            position = scanner.nextInt();
+            break;
             }
-            if (position < 1 && position > 9 && isAvailable(board, position) == false) {
+            if (position < 1 || position > 9 || !isAvailable(board, position)) {
                 System.out.println("please try again your number already taken or out of boundary");
+                position = scanner.nextInt();
             }
-        } while (position < 1 && position > 9);
+        } while (position < 1 || position > 9|| !isAvailable(board, position));
+        return position;
     }
-
     public static char checkWinner(char[] board) {
         char theWinnerIs = '-';
         for (int i = 0; i < board.length; i++) {
@@ -62,12 +65,14 @@ public class Program5 {
         }
         return theWinnerIs;
     }
-
     public static boolean placeSymbolOnBoard(char[] board, int placeOnBoard, char xOrO) {
-        boolean wonExist =false;
+        boolean wonExist = false;
+        do {
             if (isAvailable(board, placeOnBoard)) {
+                printBoard(board);
                 board[placeOnBoard] = checkWinner(board);
             }
+        }while (!wonExist || checkWinner(board)=='-');
         return wonExist;
     }
 }
