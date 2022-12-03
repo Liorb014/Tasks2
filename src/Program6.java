@@ -14,43 +14,135 @@ public class Program6 {
     }
     public static int parameterA(String equation){
         int a=0;
+        int numberLength=0;
         if(equation.startsWith("-")){
+            for (int i = 0; i < equation.length(); i++) {
+                if(equation.startsWith("-")){
+                    i++;
+                }
+                if (equation.charAt(i)=='x'){
+                    numberLength=i;
+                    if(numberLength >1){
+                        a= Integer.parseInt(equation.substring(0,numberLength));
+                    }
+                    break;
+                }
+            }
             a = Character.getNumericValue(equation.charAt(1)) * -1;
         }else {
-            a = Character.getNumericValue(equation.charAt(0));
+            for (int i = 0; i < equation.length(); i++) {
+                if(equation.startsWith("-")){
+                    i++;
+                }
+                if (equation.charAt(i)=='x'){
+                    numberLength=i;
+                    if(numberLength >=1){
+                        a= Integer.parseInt(equation.substring(0,numberLength));
+                    }
+                    break;
+                }
+            }
+            // a = Character.getNumericValue(equation.charAt(0));
         }
         return a;
     }
     public static int parameterB(String equation){
         int b=0;
+        int place=0;
+        int numberLength = 0;
         if(equation.charAt(0)=='-'){
-            if(equation.charAt(5) == '-'){
-                b = Character.getNumericValue(equation.charAt(6))* -1;
-            }else {
-                b = Character.getNumericValue(equation.charAt(6));
+            if(parameterA(equation)>9){
+                place++;
+                if (parameterA(equation)/10 >=10){
+                    place++;
+                    if(equation.charAt(5+place) == '-'){
+                        for (int i = 5; i < equation.length(); i++) {
+                            if (equation.charAt(i)=='x'){
+                                numberLength=i-5;
+                                if(numberLength >= 1){
+                                    b= Integer.parseInt(equation.substring(4,numberLength+1));
+                                }
+                                break;
+                            }
+                        }
+                        b = Character.getNumericValue(equation.charAt(6))* -1;
+                    }else {
+                        b = Character.getNumericValue(equation.charAt(6));
+                    }
+                }
             }
         }else {
             if (equation.charAt(4) == '-') {
+                for (int i = 4; i < equation.length(); i++) {
+                    if (equation.charAt(i)=='x'){
+                        numberLength=i-4;
+                        if(numberLength >= 1){
+                            b= Integer.parseInt(equation.substring(4,numberLength));
+                        }
+                        break;
+                    }
+                }
+
                 b = Character.getNumericValue(equation.charAt(5))* -1;
             } else {
-                b = Character.getNumericValue(equation.charAt(5));
+                for (int i = 5; i < equation.length(); i++) {
+                    if (equation.charAt(i)=='x'){
+                        numberLength=i-5;
+
+                    }
+                    if(numberLength >= 1){
+                        b= Integer.parseInt(equation.substring(4,(4+numberLength+1)));
+                        break;
+                    }
+                }
+                // b = Character.getNumericValue(equation.charAt(5));
             }
         }
         return b;
     }
+
     public static int parameterC(String equation){
         int c=0;
-        if(equation.charAt(0) == '-'){
+        int numberLength=0;
+        if(equation.charAt(0) == '-'||parameterA(equation)>9){
             if(equation.charAt(8) == '-'){
+                for (int i = 8; i < equation.length(); i++) {
+                    if (equation.charAt(i)=='x'){
+                        numberLength=i-8;
+                        if(numberLength >= 1){
+                            c= Integer.parseInt(equation.substring(8,8+numberLength+1));
+                        }
+                        break;
+                    }
+                }
                 c = Character.getNumericValue(equation.charAt(9))* -1;
             }else {
                 c = Character.getNumericValue(equation.charAt(9));
             }
         }else {
             if (equation.charAt(7) == '-') {
+                for (int i = 7; i < equation.length(); i++) {
+                    if (equation.charAt(i)=='x'){
+                        numberLength=i-7;
+                        if(numberLength >= 1){
+                            c= Integer.parseInt(equation.substring(7,7+numberLength));
+                        }
+                        break;
+                    }
+                }
                 c = Character.getNumericValue(equation.charAt(8)) * -1;
             } else {
-                c = Character.getNumericValue(equation.charAt(8));
+                for (int i = 7; i < equation.length(); i++) {
+                    if (equation.charAt(i)=='x'){
+                        numberLength=i-7;
+                        if(numberLength >= 1){
+                            c= Integer.parseInt(equation.substring(7,7+numberLength));
+                        }
+                        break;
+                    }
+                }
+
+                // c = Character.getNumericValue(equation.charAt(8));
             }
         }
         return c;

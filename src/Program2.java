@@ -1,6 +1,6 @@
 public class Program2 {
     public static void main(String[] args) {
-        String myPhoneNumber = "9720526990440";
+        String myPhoneNumber = "052-8975647";
         System.out.println(phoneNumber(myPhoneNumber));
     }
     public static String phoneNumber(String userPhoneNumber) {
